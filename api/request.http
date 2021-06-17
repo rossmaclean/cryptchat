@@ -1,0 +1,18 @@
+POST localhost:8000/api/v1/login
+Content-Type: application/json
+
+{
+  "username": "Ross",
+  "password": "pass123"
+}
+
+###
+POST localhost:8000/api/v1/signup
+Content-Type: application/json
+
+{
+  "username": "Ross",
+  "confirmUsername": "Ross",
+  "password": "pass123",
+  "confirmPassword": "pass123"
+}
