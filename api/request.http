@@ -16,3 +16,11 @@ Content-Type: application/json
   "password": "pass123",
   "confirmPassword": "asd"
 }
+
+###
+POST localhost:8000/api/v1/chats
+Content-Type: application/json
+
+{
+  "username": "Ross"
+}

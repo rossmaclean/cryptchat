@@ -20,6 +20,10 @@ func main() {
 	})
 	router.POST("/api/v1/signup", controller.SignupHandler)
 	router.POST("/api/v1/login", controller.LoginHandler)
+
+	router.POST("/api/v1/chats", controller.ChatsHandler)
+	router.POST("/api/v1/chat", controller.ChatHandler)
+
 	err := router.Run(":8000")
 	if err != nil {
 		log.Fatal("Unable to start web server", err)
