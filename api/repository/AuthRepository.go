@@ -23,7 +23,7 @@ func InitDbSession() {
 	log.Print("Connected to Cassandra")
 }
 
-func SaveUserAuth(userAuth model.UserAuth) error {
+var SaveUserAuth = func(userAuth model.UserAuth) error {
 	if err := session.Query(`INSERT INTO user_auth (username, hashed_password) VALUES (?, ?)`,
 		userAuth.Username, userAuth.HashedPassword).Exec(); err != nil {
 		return err

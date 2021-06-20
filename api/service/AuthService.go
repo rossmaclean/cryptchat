@@ -12,6 +12,8 @@ import (
 	"github.com/thanhpk/randstr"
 )
 
+var GenerateFromPassword = bcrypt.GenerateFromPassword
+
 func Signup(request model.SignupRequest) error {
 	err := verifyUsernameAndPassword(request)
 	if err != nil {
@@ -23,7 +25,7 @@ func Signup(request model.SignupRequest) error {
 		return errors.New("user already exists")
 	}
 
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(request.Password), 8)
+	hashedPassword, err := GenerateFromPassword([]byte(request.Password), 8)
 	if err != nil {
 		log.Printf("Unable to hash password for user %s, %o", request.Username, err)
 		return errors.New("unable to create account")
@@ -36,6 +38,7 @@ func Signup(request model.SignupRequest) error {
 	err = repository.SaveUserAuth(userAuth)
 	if err != nil {
 		log.Printf("Unable to save auth user with username %s, %o", request.Username, err)
+		return err
 	}
 	return nil
 }

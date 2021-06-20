@@ -14,5 +14,5 @@ Content-Type: application/json
   "username": "Ross",
   "confirmUsername": "Ross",
   "password": "pass123",
-  "confirmPassword": "pass123"
+  "confirmPassword": "asd"
 }

@@ -10,8 +10,8 @@ import (
 func SignupHandler(c *gin.Context) {
 	var request model.SignupRequest
 	c.BindJSON(&request)
-	service.Signup(request)
-	c.JSON(http.StatusOK, "")
+	err := service.Signup(request)
+	c.JSON(http.StatusOK, err.Error())
 }
 
 func LoginHandler(c *gin.Context) {
