@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-// ChatsHandler Get all chats  for a user
+// ChatsHandler Get all chats for a user
 func ChatsHandler(c *gin.Context) {
 	var request model.ChatsRequest
 	c.BindJSON(&request)
