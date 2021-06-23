@@ -9,6 +9,7 @@ import (
 	"log"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/google/uuid"
 	"github.com/thanhpk/randstr"
 )
 
@@ -20,7 +21,7 @@ func Signup(request model.SignupRequest) error {
 		return err
 	}
 
-	uAuth, err := repository.GetUserAuth(request.Username)
+	uAuth, err := repository.GetUser(request.Username)
 	if uAuth != nil {
 		return errors.New("user already exists")
 	}
@@ -30,12 +31,14 @@ func Signup(request model.SignupRequest) error {
 		log.Printf("Unable to hash password for user %s, %o", request.Username, err)
 		return errors.New("unable to create account")
 	}
-	userAuth := model.UserAuth{
+	userAuth := model.User{
+		UserId:         uuid.New().String(),
 		Username:       request.Username,
 		HashedPassword: hashedPassword,
+		Email:          request.Email,
 	}
 
-	err = repository.SaveUserAuth(userAuth)
+	err = repository.SaveUser(userAuth)
 	if err != nil {
 		log.Printf("Unable to save auth user with username %s, %o", request.Username, err)
 		return err
@@ -54,7 +57,7 @@ func verifyUsernameAndPassword(request model.SignupRequest) error {
 var CompareHashAndPassword = bcrypt.CompareHashAndPassword
 
 func Login(request model.LoginRequest) (string, error) {
-	authUser, err := repository.GetUserAuth(request.Username)
+	authUser, err := repository.GetUser(request.Username)
 	if authUser == nil {
 		return "", errors.New("user not found")
 	}

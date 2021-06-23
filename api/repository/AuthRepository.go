@@ -8,7 +8,9 @@ import (
 
 var session gocql.Session
 
-const userAuthTable = "user_auth"
+func GetDbSession() gocql.Session {
+	return session
+}
 
 func InitDbSession() {
 	cluster := gocql.NewCluster("127.0.0.1")
@@ -23,19 +25,23 @@ func InitDbSession() {
 	log.Print("Connected to Cassandra")
 }
 
-var SaveUserAuth = func(userAuth model.UserAuth) error {
-	if err := session.Query(`INSERT INTO user_auth (username, hashed_password) VALUES (?, ?)`,
-		userAuth.Username, userAuth.HashedPassword).Exec(); err != nil {
+var SaveUser = func(user model.User) error {
+	if err := session.Query(`INSERT INTO user (user_id, username, email, hashed_password) VALUES (?, ?, ?, ?)`,
+		user.UserId, user.Username, user.Email, user.HashedPassword).Exec(); err != nil {
 		return err
 	}
 	return nil
 }
 
-var GetUserAuth = func(username string) (*model.UserAuth, error) {
-	userAuth := new(model.UserAuth)
-	if err := session.Query(`SELECT username, hashed_password FROM user_auth WHERE username = ? LIMIT 1`,
-		username).Consistency(gocql.One).Scan(&userAuth.Username, &userAuth.HashedPassword); err != nil {
+var GetUser = func(username string) (*model.User, error) {
+	user := new(model.User)
+	if err := session.Query(`SELECT user_id, username, email, hashed_password FROM user WHERE username = ? LIMIT 1`,
+		username).Consistency(gocql.One).Scan(
+		&user.UserId,
+		&user.Username,
+		&user.Email,
+		&user.HashedPassword); err != nil {
 		return nil, err
 	}
-	return userAuth, nil
+	return user, nil
 }

@@ -10,9 +10,19 @@ type ChatsResponse struct {
 }
 
 type ChatRequest struct {
-	ID string `json:"id"`
+	ChatId string `json:"chatId"`
 }
 
 type Chat struct {
-	ID string `json:"id"`
+	User      string `json:"user"`
+	ChatId    string `json:"chatId"`
+	Timestamp string `json:"timestamp"`
+}
+
+type ChatMessage struct {
+	ChatId    string `json:"chatId"`
+	MessageId string `json:"messageId"`
+	Timestamp string `json:"timestamp"`
+	Message   string `json:"message"`
+	User      string `json:"user"`
 }

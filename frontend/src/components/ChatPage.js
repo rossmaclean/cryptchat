@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import React from "react";
 import {login} from "../service/auth-service";
 
-export class LoginPage extends React.Component {
+export class ChatPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {username: '', password: ''}

@@ -22,12 +22,13 @@ func ChatsHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
-// ChatHandler Get all details for a specific chat
+// ChatHandler Get all messages for a specific chat
 func ChatHandler(c *gin.Context) {
 	var request model.ChatRequest
 	c.BindJSON(&request)
-	chatDetails, err := service.GetChatDetails(request)
+	chatMessages, err := service.GetChatMessages(request)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err)
 	}
+	c.JSON(http.StatusOK, chatMessages)
 }

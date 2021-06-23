@@ -5,10 +5,13 @@ type SignupRequest struct {
 	ConfirmUsername string `json:"confirmUsername"`
 	Password        string `json:"password"`
 	ConfirmPassword string `json:"confirmPassword"`
+	Email           string `json:"email"`
 }
 
-type UserAuth struct {
+type User struct {
+	UserId         string
 	Username       string
+	Email          string
 	HashedPassword []byte
 }
 

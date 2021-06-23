@@ -2,22 +2,15 @@ package service
 
 import (
 	"cryptchat/model"
+	"cryptchat/repository"
 )
 
 func GetChats(request model.ChatsRequest) ([]model.Chat, error) {
-	chats := make([]model.Chat, 2)
-	chat1 := model.Chat{
-		ID: "54321",
-	}
-	chats[0] = chat1
-
-	chat2 := model.Chat{
-		ID: "1234",
-	}
-	chats[1] = chat2
-	return chats, nil
+	chats, err := repository.GetChats(request.Username)
+	return chats, err
 }
 
-func GetChatDetails(request model.ChatRequest) (model.ChatDetails, error) {
-
+func GetChatMessages(request model.ChatRequest) ([]model.ChatMessage, error) {
+	messages, err := repository.GetChatMessages(request.ChatId)
+	return messages, err
 }
