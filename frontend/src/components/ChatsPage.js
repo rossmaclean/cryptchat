@@ -9,7 +9,7 @@ import {ChatCard} from "./ChatCard";
 export class ChatsPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {username: "Ross", chats: [1,2,3,4]}
+        this.state = {username: "Ross", userId: "Ross", chats: []}
     }
 
     componentDidMount() {
@@ -36,10 +36,10 @@ export class ChatsPage extends React.Component {
                             <Col xs lg="3">
                                 Nav Here
                                 {this.state.chats.map(chat =>
-                                    <ChatCard></ChatCard>
+                                    <ChatCard chat={chat}></ChatCard>
                                 )}
                             </Col>
-                            <Col>Big Chat</Col>
+                            {/*<ChatView></ChatView>*/}
                         </Row>
                     </Container>
 

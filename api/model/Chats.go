@@ -1,28 +1,38 @@
 package model
 
-type ChatsRequest struct {
-	Username string `json:"username"`
+type GetChatsRequest struct {
+	UserId string `json:"userId"`
 }
 
-type ChatsResponse struct {
-	Username string `json:"username"`
-	Chats    []Chat `json:"chats"`
+type GetChatsResponse struct {
+	Chats []Chat `json:"chats"`
 }
 
-type ChatRequest struct {
+type GetChatMessagesRequest struct {
 	ChatId string `json:"chatId"`
 }
 
 type Chat struct {
-	User      string `json:"user"`
+	UserId    string `json:"userId"`
 	ChatId    string `json:"chatId"`
+	MessageId string `json:"messageId"`
 	Timestamp string `json:"timestamp"`
+}
+
+type GetChatMessagesResponse struct {
+	ChatMessages []ChatMessage `json:"chatMessages"`
 }
 
 type ChatMessage struct {
 	ChatId    string `json:"chatId"`
+	UserId    string `json:"userId"`
+	Message   string `json:"message"`
 	MessageId string `json:"messageId"`
 	Timestamp string `json:"timestamp"`
-	Message   string `json:"message"`
-	User      string `json:"user"`
+}
+
+type SaveChatMessageRequest struct {
+	ChatId  string `json:"chatId"`
+	UserId  string `json:"userId"`
+	Message string `json:"message"`
 }
