@@ -9,9 +9,9 @@ export class ChatCard extends React.Component {
 
     render() {
         return (
-            <Card>
-                <Card.Title>{this.state.chat.userId}</Card.Title>
-                <Card.Text>{this.state.chat.message}?</Card.Text>
+            <Card style={{margin: "5%"}}>
+                <Card.Title>{this.state.chat.users[0].username}</Card.Title>
+                <Card.Text>{this.state.chat.lastMessage}</Card.Text>
             </Card>
         )
     }

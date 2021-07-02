@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS chat_messages
 
 
 CREATE MATERIALIZED VIEW chats AS
-SELECT message_id, user_id, message_id, timestamp, chat_id
+SELECT message_id, user_id, timestamp, chat_id, timestamp
 FROM chat_messages
 WHERE user_id IS NOT NULL
   AND chat_id IS NOT NULL

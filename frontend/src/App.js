@@ -6,6 +6,7 @@ import {LoginPage} from "./components/LoginPage";
 import {BrowserRouter, Route} from "react-router-dom";
 import {SignupPage} from "./components/SignupPage";
 import {ChatsPage} from "./components/ChatsPage";
+import ChatShell from "./containers/shell/ChatShell";
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
                     {/*<Route path="/" component={App}/>*/}
                     <Route path="/login" component={LoginPage}/>
                     <Route path="/signup" component={SignupPage}/>
-                    <Route path="/chats" component={ChatsPage}/>
+                    <Route path="/chats" component={ChatShell}/>
                 </main>
             </BrowserRouter>
 
