@@ -7,7 +7,7 @@ const delay = (ms) => new Promise(res => setTimeout(res, ms));
 const conversations = [
     { 
         id: '1',
-        imageUrl: require('../../images/profiles/daryl.png'),
+        imageUrl: 'https://minio.rossmac.co.uk/cryptchat/images/daryl.png',
         imageAlt: 'Daryl Duckmanton',
         title: 'Daryl Duckmanton',
         createdAt: 'Apr 16',
@@ -21,7 +21,7 @@ const conversations = [
                 isMyMessage: true
             },
             {
-                imageUrl: require('../../images/profiles/daryl.png'),
+                imageUrl: 'https://minio.rossmac.co.uk/cryptchat/images/daryl.png',
                 imageAlt: 'Daryl Duckmanton',
                 messageText: `
                     Yeah I think it's best we do that. Otherwise things won't work well at all. 
@@ -39,7 +39,7 @@ const conversations = [
                 isMyMessage: true
             },
             {
-                imageUrl: require('../../images/profiles/daryl.png'),
+                imageUrl: 'https://minio.rossmac.co.uk/cryptchat/images/daryl.png',
                 imageAlt: 'Daryl Duckmanton',
                 messageText: `
                     All I know is where I live it's too hard
@@ -59,7 +59,7 @@ const conversations = [
                 isMyMessage: true
             },
             {
-                imageUrl: require('../../images/profiles/daryl.png'),
+                imageUrl: 'https://minio.rossmac.co.uk/cryptchat/images/daryl.png',
                 imageAlt: 'Daryl Duckmanton',
                 messageText: `
                     I'm just in the process of finishing off the
@@ -76,7 +76,7 @@ const conversations = [
                 isMyMessage: true
             },
             {
-                imageUrl: require('../../images/profiles/daryl.png'),
+                imageUrl: 'https://minio.rossmac.co.uk/cryptchat/images/daryl.png',
                 imageAlt: 'Daryl Duckmanton',
                 messageText: ' Hey mate what\'s up?',
                 createdAt: 'Apr 13',
@@ -93,7 +93,7 @@ const conversations = [
     },
     {
         id: '2', 
-        imageUrl: require('../../images/profiles/kim.jpeg'),
+        imageUrl: 'https://minio.rossmac.co.uk/cryptchat/images/kim.jpeg',
         imageAlt: 'Kim O\'Neil',
         title: 'Kim O\'Neil',
         createdAt: 'Oct 20',
@@ -102,7 +102,7 @@ const conversations = [
     },
     {
         id: '3', 
-        imageUrl: require('../../images/profiles/john.jpeg'),
+        imageUrl: 'https://minio.rossmac.co.uk/cryptchat/images/john.jpeg',
         imageAlt: 'John Anderson',
         title: 'John Anderson',
         createdAt: '1 week ago',
@@ -111,7 +111,7 @@ const conversations = [
     },
     { 
         id: '4',
-        imageUrl: require('../../images/profiles/ben.png'),
+        imageUrl: 'https://minio.rossmac.co.uk/cryptchat/images/ben.png',
         imageAlt: 'Ben Smith',
         title: 'Ben Smith',
         createdAt: '2:49 PM',
@@ -120,7 +120,7 @@ const conversations = [
     },
     { 
         id: '5',
-        imageUrl: require('../../images/profiles/douglas.png'),
+        imageUrl: 'https://minio.rossmac.co.uk/cryptchat/images/douglas.png',
         imageAlt: 'Douglas Johannasen',
         title: 'Douglas Johannasen',
         createdAt: '6:14 PM',
@@ -129,7 +129,7 @@ const conversations = [
     },
     { 
         id: '6',
-        imageUrl: require('../../images/profiles/jacob.png'),
+        imageUrl: 'https://minio.rossmac.co.uk/cryptchat/images/jacob.png',
         imageAlt: 'Jacob Manly',
         title: 'Jacob Manly',
         createdAt: '3 secs ago',
@@ -138,7 +138,7 @@ const conversations = [
     },
     { 
         id: '7',
-        imageUrl: require('../../images/profiles/stacey.jpeg'),
+        imageUrl: 'https://minio.rossmac.co.uk/cryptchat/images/stacey.jpeg',
         imageAlt: 'Stacey Wilson',
         title: 'Stacey Wilson',
         createdAt: '30 mins ago',
@@ -147,7 +147,7 @@ const conversations = [
     },
     { 
         id: '8',
-        imageUrl: require('../../images/profiles/stan.jpeg'),
+        imageUrl: 'https://minio.rossmac.co.uk/cryptchat/images/stan.jpeg',
         imageAlt: 'Stan George',
         title: 'Stan George',
         createdAt: '1 week ago',
@@ -156,7 +156,7 @@ const conversations = [
     },
     { 
         id: '9',
-        imageUrl: require('../../images/profiles/sarah.jpeg'),
+        imageUrl: 'https://minio.rossmac.co.uk/cryptchat/images/sarah.jpeg',
         imageAlt: 'Sarah Momes',
         title: 'Sarah Momes',
         createdAt: '1 year ago',
