@@ -22,6 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: echo ${GITHUB_REF#refs/heads/}
       - run: docker login --username rossmaclean --password ${{ secrets.DOCKERHUB_TOKEN }}
       - run: docker build -t rossmaclean/cryptchat:${{ github.event.inputs.version }} .
       - run: docker push rossmaclean/cryptchat:${{ github.event.inputs.version }}
