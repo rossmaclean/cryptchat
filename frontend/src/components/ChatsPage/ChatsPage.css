@@ -1,0 +1,11 @@
+.chats-page {
+
+}
+
+.chats-container {
+  background-color: aliceblue;
+  border-radius: 5px;
+  border: 4px solid lightblue;
+  margin: 1em;
+  padding: 1em;
+}

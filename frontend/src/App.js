@@ -1,37 +1,30 @@
-import React from 'react';
-import Container from 'react-bootstrap/Container';
-
 import './App.css';
-import {LoginPage} from "./components/LoginPage";
-import {BrowserRouter, Route} from "react-router-dom";
-import {SignupPage} from "./components/SignupPage";
-import {ChatsPage} from "./components/ChatsPage";
-import ChatShell from "./containers/shell/ChatShell";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import LoginPage from "./components/LoginPage/LoginPage";
+import SignupPage from "./components/SignupPage/SignupPage";
+import {BrowserRouter, Link, Route, Switch} from "react-router-dom";
+import ChatsPage from "./components/ChatsPage/ChatsPage";
 
 function App() {
-
     return (
-        <Container className="p-3">
+        <div>
+            <h3>Cryptchat</h3>
             <BrowserRouter>
-                <main>
-                    <nav>
-                        <ul>
-
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/login">Login</a></li>
-                            <li><a href="/signup">Signup</a></li>
-                        </ul>
-                    </nav>
-
-                    {/*<Route path="/" component={App}/>*/}
+                <Link to="/home">Home</Link>
+                <Link to="/login">Login</Link>
+                <Link to="/signup">Signup</Link>
+                <Link to="/chats">Chats</Link>
+                <br/><br/>
+                <Switch>
+                    {/*<Route exact path="/" component={Home} />*/}
                     <Route path="/login" component={LoginPage}/>
                     <Route path="/signup" component={SignupPage}/>
-                    <Route path="/chats" component={ChatShell}/>
-                </main>
+                    <Route path="/chats" component={ChatsPage}/>
+                </Switch>
+                <br/><br/>
             </BrowserRouter>
-
-        </Container>
-    )
+        </div>
+    );
 }
 
 export default App;

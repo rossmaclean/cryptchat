@@ -4,7 +4,7 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 ADD ./frontend ./
 RUN npm install --silent
-RUN npm run test
+RUN npm run test -- --watchAll=false
 RUN npm run build
 
 FROM golang:alpine as go-build

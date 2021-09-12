@@ -2,7 +2,7 @@ POST localhost:8000/api/v1/login
 Content-Type: application/json
 
 {
-  "username": "Ross",
+  "username": "Ross4",
   "password": "pass123"
 }
 
@@ -11,10 +11,10 @@ POST localhost:8000/api/v1/signup
 Content-Type: application/json
 
 {
-  "username": "Ross",
-  "confirmUsername": "Ross",
+  "username": "Ross4",
+  "confirmUsername": "Ross4",
   "password": "pass123",
-  "confirmPassword": "asd"
+  "confirmPassword": "pass123"
 }
 
 ###
@@ -22,7 +22,7 @@ POST localhost:8000/api/v1/chats
 Content-Type: application/json
 
 {
-  "userId": "Ross"
+  "userId": "user1"
 }
 
 ###
