@@ -1,6 +1,7 @@
 package authcore
 
 import (
+	"cryptchat/auth/right"
 	"errors"
 	"fmt"
 	"golang.org/x/crypto/bcrypt"
@@ -13,7 +14,7 @@ import (
 
 var GenerateFromPassword = bcrypt.GenerateFromPassword
 
-func Signup(request SignupRequest) error {
+func Signup(request authright.SignupRequest) error {
 	err := verifyUsernameAndPassword(request)
 	if err != nil {
 		return err
@@ -29,7 +30,7 @@ func Signup(request SignupRequest) error {
 		log.Printf("Unable to hash password for user %s, %o", request.Username, err)
 		return errors.New("unable to create account")
 	}
-	userAuth := User{
+	userAuth := authright.User{
 		UserId:         uuid.New().String(),
 		Username:       request.Username,
 		HashedPassword: hashedPassword,
@@ -44,7 +45,7 @@ func Signup(request SignupRequest) error {
 	return nil
 }
 
-func verifyUsernameAndPassword(request SignupRequest) error {
+func verifyUsernameAndPassword(request authright.SignupRequest) error {
 	if request.Username == request.ConfirmUsername &&
 		request.Password == request.ConfirmPassword {
 		return nil
@@ -54,7 +55,7 @@ func verifyUsernameAndPassword(request SignupRequest) error {
 
 var CompareHashAndPassword = bcrypt.CompareHashAndPassword
 
-func Login(request LoginRequest) (string, error) {
+func Login(request authright.LoginRequest) (string, error) {
 	authUser, err := FindUser(request.Username)
 	if authUser == nil {
 		return "", errors.New("user not found")

@@ -2,7 +2,6 @@ package authright
 
 import (
 	"context"
-	"cryptchat/auth/core"
 	properties2 "cryptchat/properties"
 	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
@@ -35,16 +34,16 @@ func getMongoCollection() *mongo.Collection {
 	return client.Database(p.Database).Collection(p.AuthCollection)
 }
 
-var SaveUserMongo = func(user authcore.User) error {
+var SaveUserMongo = func(user User) error {
 	_, insertErr := collection.InsertOne(context.TODO(), user)
 	return insertErr
 }
 
-var FindUserMongo = func(username string) (*authcore.User, error) {
+var FindUserMongo = func(username string) (*User, error) {
 	filter := bson.D{{"username", username}}
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	var result = new(authcore.User)
+	var result = new(User)
 	err := collection.FindOne(ctx, filter).Decode(&result)
 	if err == mongo.ErrNoDocuments {
 		return nil, nil

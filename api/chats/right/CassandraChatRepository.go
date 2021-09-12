@@ -1,10 +1,6 @@
 package chatsright
 
-import (
-	"cryptchat/chats/core"
-)
-
-var GetChats = func(userId string) ([]chatscore.Chat, error) {
+var GetChats = func(userId string) ([]Chat, error) {
 	//var chats []model.Chat
 	//iter := right.session.Query(`SELECT user_id, chat_id, message_id, timestamp FROM chats WHERE user_id=?`,
 	//	userId).Consistency(gocql.One).Iter()
@@ -29,7 +25,7 @@ var GetChats = func(userId string) ([]chatscore.Chat, error) {
 	return nil, nil
 }
 
-var GetChatMessages = func(chatId string) ([]chatscore.ChatMessage, error) {
+var GetChatMessages = func(chatId string) ([]ChatMessage, error) {
 	//var chatMessages []model.ChatMessage
 	////(chat_id), user_id, message_id, timestamp)
 	//iter := right.session.Query(`SELECT chat_id, user_id, message_id, message, timestamp FROM chat_messages WHERE chat_id=?`,

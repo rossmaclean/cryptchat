@@ -1,6 +1,7 @@
 package authcore
 
 import (
+	"cryptchat/auth/right"
 	"errors"
 	"reflect"
 	"testing"
@@ -9,13 +10,13 @@ import (
 func Test_Signup(t *testing.T) {
 	tests := []struct {
 		name         string
-		request      SignupRequest
+		request      authright.SignupRequest
 		mockFunc     func()
 		expectingErr bool
 	}{
 		{
 			name: "All success no error",
-			request: SignupRequest{
+			request: authright.SignupRequest{
 				Username:        "user1",
 				ConfirmUsername: "user1",
 				Password:        "password",
@@ -23,7 +24,7 @@ func Test_Signup(t *testing.T) {
 				Email:           "user@mail.com",
 			},
 			mockFunc: func() {
-				FindUser = func(username string) (*User, error) {
+				FindUser = func(username string) (*authright.User, error) {
 					return nil, nil
 				}
 
@@ -31,7 +32,7 @@ func Test_Signup(t *testing.T) {
 					return []byte("hash"), nil
 				}
 
-				SaveUser = func(auth User) error {
+				SaveUser = func(auth authright.User) error {
 					return nil
 				}
 			},
@@ -39,7 +40,7 @@ func Test_Signup(t *testing.T) {
 		},
 		{
 			name: "Usernames do not match",
-			request: SignupRequest{
+			request: authright.SignupRequest{
 				Username:        "user2",
 				ConfirmUsername: "not-matching",
 				Password:        "password",
@@ -47,7 +48,7 @@ func Test_Signup(t *testing.T) {
 				Email:           "user2@mail.com",
 			},
 			mockFunc: func() {
-				FindUser = func(username string) (*User, error) {
+				FindUser = func(username string) (*authright.User, error) {
 					return nil, nil
 				}
 
@@ -55,7 +56,7 @@ func Test_Signup(t *testing.T) {
 					return []byte("hash"), nil
 				}
 
-				SaveUser = func(auth User) error {
+				SaveUser = func(auth authright.User) error {
 					return nil
 				}
 			},
@@ -63,7 +64,7 @@ func Test_Signup(t *testing.T) {
 		},
 		{
 			name: "Passwords do not match",
-			request: SignupRequest{
+			request: authright.SignupRequest{
 				Username:        "user3",
 				ConfirmUsername: "user3",
 				Password:        "password",
@@ -71,7 +72,7 @@ func Test_Signup(t *testing.T) {
 				Email:           "user3@mail.com",
 			},
 			mockFunc: func() {
-				FindUser = func(username string) (*User, error) {
+				FindUser = func(username string) (*authright.User, error) {
 					return nil, nil
 				}
 
@@ -79,7 +80,7 @@ func Test_Signup(t *testing.T) {
 					return []byte("hash"), nil
 				}
 
-				SaveUser = func(auth User) error {
+				SaveUser = func(auth authright.User) error {
 					return nil
 				}
 			},
@@ -87,7 +88,7 @@ func Test_Signup(t *testing.T) {
 		},
 		{
 			name: "User already exists",
-			request: SignupRequest{
+			request: authright.SignupRequest{
 				Username:        "user3",
 				ConfirmUsername: "user3",
 				Password:        "password",
@@ -95,8 +96,8 @@ func Test_Signup(t *testing.T) {
 				Email:           "user3@mail.com",
 			},
 			mockFunc: func() {
-				FindUser = func(username string) (*User, error) {
-					return &User{
+				FindUser = func(username string) (*authright.User, error) {
+					return &authright.User{
 						UserId:         "bhd32",
 						Username:       "user3",
 						HashedPassword: []byte("hash"),
@@ -108,7 +109,7 @@ func Test_Signup(t *testing.T) {
 					return []byte("hash"), nil
 				}
 
-				SaveUser = func(auth User) error {
+				SaveUser = func(auth authright.User) error {
 					return nil
 				}
 			},
@@ -116,7 +117,7 @@ func Test_Signup(t *testing.T) {
 		},
 		{
 			name: "Error hashing password",
-			request: SignupRequest{
+			request: authright.SignupRequest{
 				Username:        "user3",
 				ConfirmUsername: "user3",
 				Password:        "password",
@@ -124,7 +125,7 @@ func Test_Signup(t *testing.T) {
 				Email:           "user3@mail.com",
 			},
 			mockFunc: func() {
-				FindUser = func(username string) (*User, error) {
+				FindUser = func(username string) (*authright.User, error) {
 					return nil, nil
 				}
 
@@ -132,7 +133,7 @@ func Test_Signup(t *testing.T) {
 					return nil, errors.New("")
 				}
 
-				SaveUser = func(auth User) error {
+				SaveUser = func(auth authright.User) error {
 					return nil
 				}
 			},
@@ -140,7 +141,7 @@ func Test_Signup(t *testing.T) {
 		},
 		{
 			name: "Error saving user",
-			request: SignupRequest{
+			request: authright.SignupRequest{
 				Username:        "user3",
 				ConfirmUsername: "user3",
 				Password:        "password",
@@ -148,7 +149,7 @@ func Test_Signup(t *testing.T) {
 				Email:           "user3@mail.com",
 			},
 			mockFunc: func() {
-				FindUser = func(username string) (*User, error) {
+				FindUser = func(username string) (*authright.User, error) {
 					return nil, nil
 				}
 
@@ -156,7 +157,7 @@ func Test_Signup(t *testing.T) {
 					return []byte("hash"), nil
 				}
 
-				SaveUser = func(auth User) error {
+				SaveUser = func(auth authright.User) error {
 					return errors.New("")
 				}
 			},
@@ -189,7 +190,7 @@ func Test_Signup(t *testing.T) {
 func Test_Login(t *testing.T) {
 	tests := []struct {
 		name          string
-		request       LoginRequest
+		request       authright.LoginRequest
 		mockFunc      func()
 		expectedToken string
 		expectingErr  bool
@@ -219,13 +220,13 @@ func Test_Login(t *testing.T) {
 		//},
 		{
 			name: "Password incorrect",
-			request: LoginRequest{
+			request: authright.LoginRequest{
 				Username: "user2",
 				Password: "password",
 			},
 			mockFunc: func() {
-				FindUser = func(username string) (*User, error) {
-					return &User{
+				FindUser = func(username string) (*authright.User, error) {
+					return &authright.User{
 						UserId:         "ads23",
 						Username:       "user2",
 						HashedPassword: []byte("hashedPassword"),
@@ -242,12 +243,12 @@ func Test_Login(t *testing.T) {
 		},
 		{
 			name: "User doesn't exist",
-			request: LoginRequest{
+			request: authright.LoginRequest{
 				Username: "user3",
 				Password: "password",
 			},
 			mockFunc: func() {
-				FindUser = func(username string) (*User, error) {
+				FindUser = func(username string) (*authright.User, error) {
 					return nil, nil
 				}
 

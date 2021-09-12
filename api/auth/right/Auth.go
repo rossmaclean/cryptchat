@@ -1,4 +1,4 @@
-package authcore
+package authright
 
 type SignupRequest struct {
 	Username        string `json:"username"`

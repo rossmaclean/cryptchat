@@ -2,6 +2,7 @@ package chatsleft
 
 import (
 	chatscore "cryptchat/chats/core"
+	"cryptchat/chats/right"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -24,7 +25,7 @@ func ChatsHandler(c *gin.Context) {
 		return
 	}
 
-	var chats []chatscore.ChatMongo
+	var chats []chatsright.ChatMongo
 	chats, err = chatscore.GetChatsForUser(request.UserId)
 	if err != nil {
 		c.Status(500)
@@ -42,7 +43,7 @@ func ChatMessageHandler(c *gin.Context) {
 		log.Fatal(err)
 		return
 	}
-	var chatMessages chatscore.ChatMessageMongo
+	var chatMessages chatsright.ChatMessageMongo
 	chatMessages, err = chatscore.GetChatMessages(request.ChatId)
 	if err != nil {
 		c.Status(500)

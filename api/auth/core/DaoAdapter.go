@@ -4,12 +4,12 @@ import (
 	authright "cryptchat/auth/right"
 )
 
-var SaveUser = func(user User) error {
+var SaveUser = func(user authright.User) error {
 	return authright.SaveUserMongo(user)
 	//return authright.SaveUserCassandra(user)
 }
 
-var FindUser = func(username string) (*User, error) {
+var FindUser = func(username string) (*authright.User, error) {
 	return authright.FindUserMongo(username)
 	//return authright.FindUserCassandra(username)
 }

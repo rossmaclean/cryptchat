@@ -2,7 +2,6 @@ package chatsright
 
 import (
 	"context"
-	"cryptchat/chats/core"
 	properties2 "cryptchat/properties"
 	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
@@ -40,13 +39,13 @@ func getMongoCollection(collection string) *mongo.Collection {
 	return client.Database(p.Database).Collection(collection)
 }
 
-var GetChatsForUserMongo = func(userId string) ([]chatscore.ChatMongo, error) {
+var GetChatsForUserMongo = func(userId string) ([]ChatMongo, error) {
 	filterCursor, err := chatsCollection.Find(context.TODO(), bson.M{"userIds": userId})
 	if err != nil {
 		log.Fatal(err)
 		return nil, err
 	}
-	var chats []chatscore.ChatMongo
+	var chats []ChatMongo
 	if err = filterCursor.All(context.TODO(), &chats); err != nil {
 		log.Fatal(err)
 		return nil, err
@@ -54,16 +53,16 @@ var GetChatsForUserMongo = func(userId string) ([]chatscore.ChatMongo, error) {
 	return chats, nil
 }
 
-var GetChatMessagesMongo = func(chatId string) (chatscore.ChatMessageMongo, error) {
-	var messages chatscore.ChatMessageMongo
+var GetChatMessagesMongo = func(chatId string) (ChatMessageMongo, error) {
+	var messages ChatMessageMongo
 	if err := messagesCollection.FindOne(context.TODO(), bson.M{"chatId": chatId}).Decode(&messages); err != nil {
 		log.Fatal(err)
-		return chatscore.ChatMessageMongo{}, nil
+		return ChatMessageMongo{}, nil
 	}
 	return messages, nil
 }
 
-var SaveChatMongo = func(chat chatscore.ChatMongo) error {
+var SaveChatMongo = func(chat ChatMongo) error {
 	_, err := chatsCollection.InsertMany(context.TODO(), []interface{}{
 		bson.D{
 			{"chatId", chat.ChatId},
@@ -78,7 +77,7 @@ var SaveChatMongo = func(chat chatscore.ChatMongo) error {
 	return nil
 }
 
-var SaveChatMessageMongo = func(chatMessage chatscore.ChatMessageMongo) error {
+var SaveChatMessageMongo = func(chatMessage ChatMessageMongo) error {
 	_, err := chatsCollection.InsertMany(context.TODO(), []interface{}{
 		bson.D{
 			{"chatId", chatMessage.ChatId},

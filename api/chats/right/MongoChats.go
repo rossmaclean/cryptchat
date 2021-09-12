@@ -1,4 +1,4 @@
-package chatscore
+package chatsright
 
 type GetChatsRequestMongo struct {
 	UserId string `json:"userId"`

@@ -2,13 +2,14 @@ package authleft
 
 import (
 	authcore "cryptchat/auth/core"
+	"cryptchat/auth/right"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 )
 
 func SignupHandler(c *gin.Context) {
-	var request authcore.SignupRequest
+	var request authright.SignupRequest
 	err := c.BindJSON(&request)
 	if err != nil {
 		c.Status(400)
@@ -26,7 +27,7 @@ func SignupHandler(c *gin.Context) {
 }
 
 func LoginHandler(c *gin.Context) {
-	var request authcore.LoginRequest
+	var request authright.LoginRequest
 	err := c.BindJSON(&request)
 	if err != nil {
 		c.Status(400)

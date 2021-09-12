@@ -1,4 +1,4 @@
-package chatscore
+package chatsright
 
 type GetChatsRequest struct {
 	UserId string `json:"userId"`
