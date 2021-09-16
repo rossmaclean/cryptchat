@@ -1,7 +1,6 @@
 package properties
 
 import (
-	"fmt"
 	"github.com/magiconair/properties"
 	"os"
 )
@@ -41,7 +40,7 @@ type MongoProperties struct {
 
 func GetMongoProperties() MongoProperties {
 	mongoPassword := p.GetString("mongo.password", os.Getenv("MONGO_PASSWORD"))
-	p := MongoProperties{
+	return MongoProperties{
 		User:               p.MustGetString("mongo.user"),
 		Password:           mongoPassword,
 		Host:               p.MustGetString("mongo.host"),
@@ -50,6 +49,4 @@ func GetMongoProperties() MongoProperties {
 		MessagesCollection: p.MustGetString("mongo.collections.messages"),
 		AuthCollection:     p.MustGetString("mongo.collections.auth"),
 	}
-	fmt.Println(p)
-	return p
 }
