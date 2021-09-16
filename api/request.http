@@ -1,0 +1,49 @@
+POST localhost:8000/api/v1/login
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "pass123"
+}
+
+###
+POST localhost:8000/api/v1/signup
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "confirmUsername": "user1",
+  "password": "pass123",
+  "confirmPassword": "pass123"
+}
+
+###
+POST localhost:8000/api/v1/chats
+Content-Type: application/json
+Authorization: Bearer
+
+{
+  "userId": "user1"
+}
+
+###
+POST localhost:8000/api/v1/chat_messages
+Content-Type: application/json
+
+{
+  "chatId": "chat123"
+}
+
+###
+POST localhost:8000/api/v1/new_message
+Content-Type: application/json
+
+{
+  "userId": "Joe",
+  "chatId": "chat123",
+  "message": "Good thanks, how are you?"
+}
+
+### router.POST("/api/v1/chats", controller.GetChatsHandler)
+### router.POST("/api/v1/chat_messages", controller.GetChatMessagesHandler)
+### router.POST("/api/v1/new_message", controller.SaveChatMessageHandler)

@@ -6,9 +6,9 @@ name: Develop CI
 
 on:
   push:
-    branches: [ ross ]
+    branches: [ develop ]
   pull_request:
-    branches: [ ross ]
+    branches: [ develop ]
   workflow_dispatch:
     inputs:
       version:
@@ -23,8 +23,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: docker login --username rossmaclean --password ${{ secrets.DOCKERHUB_TOKEN }}
-      - run: docker build -t rossmaclean/cryptchat:${{ github.event.inputs.version }} .
-      - run: docker push rossmaclean/cryptchat:${{ github.event.inputs.version }}
+      - run: docker build -t rossmaclean/cryptchat:${GITHUB_SHA} .
+      - run: docker push rossmaclean/cryptchat:${GITHUB_SHA}
 
   deploy_test:
     needs: build_push_image
@@ -36,4 +36,4 @@ jobs:
         with:
           node-version: 15.x
       - run: npm i -g cloudron
-      - run: cloudron update --server my.rossmac.co.uk --token ${{ secrets.CLOUDRON_TOKEN }} --app cryptchat.test.rossmac.co.uk --image rossmaclean/cryptchat:${{ github.event.inputs.version }}
+      - run: cloudron update --server my.rossmac.co.uk --token ${{ secrets.CLOUDRON_TOKEN }} --app cryptchat.test.rossmac.co.uk --image rossmaclean/cryptchat:${GITHUB_SHA}
