@@ -17,6 +17,7 @@ FROM golang:alpine
 WORKDIR /app
 COPY --from=react-build /app/build ./frontend/build
 COPY --from=go-build /app/main .
+ADD ./api/properties .
 
 RUN adduser -S -D -H -h /app appuser
 USER appuser
