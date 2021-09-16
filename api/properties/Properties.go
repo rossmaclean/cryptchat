@@ -40,10 +40,7 @@ type MongoProperties struct {
 }
 
 func GetMongoProperties() MongoProperties {
-	mongoPassword := p.MustGetString("mongo.password")
-	if mongoPassword == "" {
-		mongoPassword = os.Getenv("MONGO_PASSWORD")
-	}
+	mongoPassword := p.GetString("mongo.password", os.Getenv("MONGO_PASSWORD"))
 	p := MongoProperties{
 		User:               p.MustGetString("mongo.user"),
 		Password:           mongoPassword,
