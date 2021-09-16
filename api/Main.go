@@ -15,11 +15,11 @@ import (
 
 func main() {
 	log.Println("Starting Application")
-	router := gin.Default()
 	gin.SetMode(gin.ReleaseMode)
+	router := gin.Default()
 	if properties2.GetEnv() != "local" {
-		router.LoadHTMLGlob("../frontend/build/*.html")
-		router.Static("/static", "./frontend/build/static")
+		router.LoadHTMLGlob("/app/code/frontend/build/*.html")
+		router.Static("/static", "/app/code/frontend/build/static")
 		router.GET("/", func(ctx *gin.Context) {
 			ctx.HTML(http.StatusOK, "index.html", gin.H{})
 		})

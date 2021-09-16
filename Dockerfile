@@ -15,7 +15,7 @@ RUN go build -o main .
 
 FROM golang:alpine
 WORKDIR /app/code
-COPY --from=react-build /app/build ./frontend/build
+COPY --from=react-build /app/build ./frontend/build/
 COPY --from=go-build /app/main ./api/
 COPY ./api/properties/*.properties ./properties/
 
