@@ -32,6 +32,7 @@ jobs:
         with:
           node-version: 15.x
       - run: npm i -g cloudron
-      - name: Set Environment Variables
-        run: cloudron env set --server my.rossmac.co.uk --token ${{ secrets.CLOUDRON_TOKEN }} --app cryptchat.test.rossmac.co.uk ENV=staging MONGO_PASSWORD=${{ secrets.MONGO_STAGING_PASSWORD }}
+#     Below is commented out as there is no way to log in with a token/server which must be done before this step
+#      - name: Set Environment Variables
+#        run: cloudron env set --app cryptchat.test.rossmac.co.uk ENV=staging MONGO_PASSWORD=${{ secrets.MONGO_STAGING_PASSWORD }}
       - run: cloudron update --server my.rossmac.co.uk --token ${{ secrets.CLOUDRON_TOKEN }} --app cryptchat.test.rossmac.co.uk --image rossmaclean/cryptchat:${GITHUB_SHA}
