@@ -23,9 +23,6 @@ func getMongoCollection(collection string) *mongo.Collection {
 	uri := fmt.Sprintf("mongodb://%s:%s@%s:27017/?authSource=%s",
 		p.User, p.Password, p.Host, p.Database)
 
-	log.Println("Mongo connection string")
-	log.Println(uri)
-
 	clientOptions := options.Client().ApplyURI(uri)
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	client, err := mongo.Connect(ctx, clientOptions)
