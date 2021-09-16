@@ -14,7 +14,7 @@ import (
 var chatsCollection = getMongoCollection(chatsCollectionName)
 var messagesCollection = getMongoCollection(messagesCollectionName)
 
-var chatsCollectionName string
+var chatsCollectionName = "chats"
 var messagesCollectionName string
 
 func getMongoCollection(collection string) *mongo.Collection {
@@ -22,6 +22,9 @@ func getMongoCollection(collection string) *mongo.Collection {
 
 	uri := fmt.Sprintf("mongodb://%s:%s@%s:27017/?authSource=%s",
 		p.User, p.Password, p.Host, p.Database)
+
+	log.Println("Mongo connection string")
+	log.Println(uri)
 
 	clientOptions := options.Client().ApplyURI(uri)
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)

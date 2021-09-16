@@ -17,6 +17,7 @@ type ChatMessageRequest struct {
 }
 
 func ChatsHandler(c *gin.Context) {
+	log.Println("Chat handler")
 	var request ChatsRequest
 	err := c.BindJSON(&request)
 	if err != nil {
@@ -32,6 +33,7 @@ func ChatsHandler(c *gin.Context) {
 		log.Fatal(err)
 		return
 	}
+	log.Println("Got chats")
 	c.JSON(200, chats)
 }
 

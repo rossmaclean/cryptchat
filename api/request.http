@@ -2,7 +2,7 @@ POST localhost:8000/api/v1/login
 Content-Type: application/json
 
 {
-  "username": "Ross4",
+  "username": "user1",
   "password": "pass123"
 }
 
@@ -11,8 +11,8 @@ POST localhost:8000/api/v1/signup
 Content-Type: application/json
 
 {
-  "username": "Ross4",
-  "confirmUsername": "Ross4",
+  "username": "user1",
+  "confirmUsername": "user1",
   "password": "pass123",
   "confirmPassword": "pass123"
 }
@@ -20,6 +20,7 @@ Content-Type: application/json
 ###
 POST localhost:8000/api/v1/chats
 Content-Type: application/json
+Authorization: Bearer
 
 {
   "userId": "user1"
