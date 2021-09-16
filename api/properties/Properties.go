@@ -26,7 +26,7 @@ func init() {
 }
 
 func GetEnv() string {
-	return os.Getenv("env")
+	return os.Getenv("ENV")
 }
 
 type MongoProperties struct {
@@ -42,7 +42,7 @@ type MongoProperties struct {
 func GetMongoProperties() MongoProperties {
 	mongoPassword := p.MustGetString("mongo.password")
 	if mongoPassword == "" {
-		mongoPassword = os.Getenv("mongo-password")
+		mongoPassword = os.Getenv("MONGO_PASSWORD")
 	}
 	p := MongoProperties{
 		User:               p.MustGetString("mongo.user"),
