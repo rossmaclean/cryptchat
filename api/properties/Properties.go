@@ -9,7 +9,7 @@ import (
 var p *properties.Properties
 
 func init() {
-	filename := "properties/"
+	filename := "./properties/"
 	switch GetEnv() {
 	case "staging":
 		filename += "staging.properties"

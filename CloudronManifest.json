@@ -7,9 +7,6 @@
   "version": "0.0.1",
   "healthCheckPath": "/",
   "httpPort": 8000,
-  "addons": {
-    "localstorage": {}
-  },
   "icon": "file://icon.png",
   "manifestVersion": 2,
   "website": "https://cryptchat.rossmac.co.uk",

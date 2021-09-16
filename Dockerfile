@@ -14,7 +14,7 @@ ADD ./api ./
 RUN go build -o main .
 
 FROM golang:alpine
-WORKDIR /app
+WORKDIR /app/code
 COPY --from=react-build /app/build ./frontend/build
 COPY --from=go-build /app/main .
 ADD ./api/properties .
