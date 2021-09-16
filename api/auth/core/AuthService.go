@@ -6,10 +6,11 @@ import (
 	"fmt"
 	"golang.org/x/crypto/bcrypt"
 	"log"
+	"os"
+	"time"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/google/uuid"
-	"github.com/thanhpk/randstr"
 )
 
 var GenerateFromPassword = bcrypt.GenerateFromPassword
@@ -68,11 +69,15 @@ func Login(request authright.LoginRequest) (string, error) {
 	return CreateToken(authUser.Username), nil
 }
 
+var mySigningKey = []byte(os.Getenv("SECRET_KEY"))
+
 func CreateToken(username string) string {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"username": username,
+		"userId": username,
+		"iss":    "cryptchat.rossmac.co.uk",
+		"exp":    time.Now().Add(time.Minute * 10).Unix(),
 	})
-	tokenString, error := token.SignedString([]byte(randstr.String(16)))
+	tokenString, error := token.SignedString([]byte(mySigningKey))
 	if error != nil {
 		fmt.Println(error)
 	}

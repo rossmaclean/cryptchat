@@ -6,9 +6,9 @@ name: Develop CI
 
 on:
   push:
-    branches: [ ross ]
+    branches: [ develop ]
   pull_request:
-    branches: [ ross ]
+    branches: [ develop ]
   workflow_dispatch:
     inputs:
       version:
