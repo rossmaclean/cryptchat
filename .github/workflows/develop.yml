@@ -9,12 +9,6 @@ on:
     branches: [ develop ]
   pull_request:
     branches: [ develop ]
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Define version'
-        required: true
-        default: 'latest'
 
 
 jobs:
@@ -22,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Print Version
+        run: echo "${GITHUB_SHA}"
       - run: docker login --username rossmaclean --password ${{ secrets.DOCKERHUB_TOKEN }}
       - run: docker build -t rossmaclean/cryptchat:${GITHUB_SHA} .
       - run: docker push rossmaclean/cryptchat:${GITHUB_SHA}

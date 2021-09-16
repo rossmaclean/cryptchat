@@ -8,12 +8,6 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Define version'
-        required: true
-        default: 'latest'
 
 
 jobs:
@@ -21,9 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Print Version
+        run: echo "${GITHUB_SHA}"
       - run: docker login --username rossmaclean --password ${{ secrets.DOCKERHUB_TOKEN }}
-      - run: docker build -t rossmaclean/cryptchat:${{ github.event.inputs.version }} .
-      - run: docker push rossmaclean/cryptchat:${{ github.event.inputs.version }}
+      - run: docker build -t rossmaclean/cryptchat:${GITHUB_SHA} .
+      - run: docker push rossmaclean/cryptchat:${GITHUB_SHA}
 
   deploy_test:
     needs: build_push_image
@@ -35,7 +31,7 @@ jobs:
         with:
           node-version: 15.x
       - run: npm i -g cloudron
-      - run: cloudron update --server my.rossmac.co.uk --token ${{ secrets.CLOUDRON_TOKEN }} --app cryptchat.test.rossmac.co.uk --image rossmaclean/cryptchat:${{ github.event.inputs.version }}
+      - run: cloudron update --server my.rossmac.co.uk --token ${{ secrets.CLOUDRON_TOKEN }} --app cryptchat.test.rossmac.co.uk --image rossmaclean/cryptchat:${GITHUB_SHA}
 
   deploy_prod:
     needs: deploy_test
@@ -47,4 +43,4 @@ jobs:
         with:
           node-version: 15.x
       - run: npm i -g cloudron
-      - run: cloudron update --server my.rossmac.co.uk --token ${{ secrets.CLOUDRON_TOKEN }} --app cryptchat.rossmac.co.uk --image rossmaclean/cryptchat:${{ github.event.inputs.version }}
+      - run: cloudron update --server my.rossmac.co.uk --token ${{ secrets.CLOUDRON_TOKEN }} --app cryptchat.rossmac.co.uk --image rossmaclean/cryptchat:${GITHUB_SHA}
