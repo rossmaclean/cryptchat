@@ -14,6 +14,7 @@ import (
 var collection = getMongoCollection()
 
 func getMongoCollection() *mongo.Collection {
+	log.Println("Connecting to MongoDB Auth")
 	p := properties2.GetMongoProperties()
 
 	uri := fmt.Sprintf("mongodb://%s:%s@%s:27017/?authSource=%s",
@@ -30,7 +31,7 @@ func getMongoCollection() *mongo.Collection {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println("Connected to MongoDB")
+	log.Println("Connected to MongoDB Auth")
 	return client.Database(p.Database).Collection(p.AuthCollection)
 }
 

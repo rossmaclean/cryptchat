@@ -17,7 +17,7 @@ func init() {
 		filename += "prod.properties"
 		break
 	default:
-		os.Setenv("env", "local")
+		os.Setenv("ENV", "local")
 		filename += "local.properties"
 		break
 	}

@@ -1,4 +1,4 @@
-POST localhost:8000/api/v1/login
+POST https://cryptchat.test.rossmac.co.uk/api/v1/login
 Content-Type: application/json
 
 {
@@ -7,7 +7,7 @@ Content-Type: application/json
 }
 
 ###
-POST localhost:8000/api/v1/signup
+POST https://cryptchat.test.rossmac.co.uk/api/v1/signup
 Content-Type: application/json
 
 {

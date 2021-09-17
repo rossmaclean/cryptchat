@@ -18,6 +18,7 @@ var chatsCollectionName = "chats"
 var messagesCollectionName string
 
 func getMongoCollection(collection string) *mongo.Collection {
+	log.Println("Connecting to MongoDB Chats")
 	p := properties2.GetMongoProperties()
 
 	uri := fmt.Sprintf("mongodb://%s:%s@%s:27017/?authSource=%s",
@@ -35,7 +36,7 @@ func getMongoCollection(collection string) *mongo.Collection {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println("Connected to MongoDB")
+	log.Println("Connected to MongoDB Chats")
 	return client.Database(p.Database).Collection(collection)
 }
 
