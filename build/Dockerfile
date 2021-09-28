@@ -1,4 +1,3 @@
-# pull official base image
 FROM node:13.12.0-alpine as react-build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH

@@ -20,6 +20,7 @@ var GenerateFromPassword = bcrypt.GenerateFromPassword
 var CompareHashAndPassword = bcrypt.CompareHashAndPassword
 var audience = "cryptchatusers"
 var issuer = "cryptchat.rossmac.co.uk"
+var mySigningKey = []byte(os.Getenv("SECRET_KEY"))
 
 func Signup(request authcoremodel.SignupRequest) (authcoremodel.SignupResponse, error) {
 	user, err := authright.GetAuthRepository().FindOneByEmail(request.Email)
@@ -71,7 +72,9 @@ func Login(request authcoremodel.LoginRequest) (authcoremodel.LoginResponse, err
 	}, nil
 }
 
-var mySigningKey = []byte(os.Getenv("SECRET_KEY"))
+//func ResetPassword(user authcoremodel.User) error {
+//
+//}
 
 func createToken(userId string, email string) string {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{

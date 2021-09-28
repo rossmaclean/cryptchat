@@ -30,6 +30,10 @@ func GetEnv() string {
 	return os.Getenv("ENV")
 }
 
+func IsLocal() bool {
+	return GetEnv() == "local"
+}
+
 type MongoProperties struct {
 	User               string
 	Password           string
