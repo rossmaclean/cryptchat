@@ -13,7 +13,6 @@ ADD ./configs ./configs
 ADD ./internal ./internal
 ADD ./go.mod .
 ADD ./go.sum .
-ADD ./vendor ./vendor
 RUN #go test -v ./...
 RUN go build -o cryptchat /app/cmd/cryptchat
 
