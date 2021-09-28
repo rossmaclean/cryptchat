@@ -5,10 +5,11 @@ import (
 	mail "github.com/xhit/go-simple-mail/v2"
 	"log"
 	"os"
+	"strconv"
 )
 
 var smtpServer string
-var smtpPort string
+var smtpPort int
 var smtpsPort string
 var smtpUsername string
 var smtpPassword string
@@ -18,7 +19,11 @@ var domain string
 func init() {
 	if !internal.IsLocal() {
 		smtpServer = os.Getenv("CLOUDRON_MAIL_SMTP_SERVER")
-		smtpPort = os.Getenv("CLOUDRON_MAIL_SMTP_PORT")
+		var err error
+		smtpPort, err = strconv.Atoi(os.Getenv("CLOUDRON_MAIL_SMTP_PORT"))
+		if err != nil {
+			log.Fatal(err)
+		}
 		smtpsPort = os.Getenv("CLOUDRON_MAIL_SMTPS_PORT")
 		smtpUsername = os.Getenv("CLOUDRON_MAIL_SMTP_USERNAME")
 		smtpPassword = os.Getenv("CLOUDRON_MAIL_SMTP_PASSWORD")
@@ -45,30 +50,30 @@ func SendMail() error {
 	log.Printf("Server: %s", smtpServer)
 	log.Printf("Domain: %s", domain)
 	server := mail.NewSMTPClient()
-	server.Host = "smtp.host.com"
-	server.Port = 587
-	server.Username = "username@host.com"
-	server.Password = "supersecretpassword"
+	server.Host = smtpServer
+	server.Port = smtpPort
+	server.Username = smtpUsername
+	server.Password = smtpPassword
 	server.Encryption = mail.EncryptionTLS
 
 	smtpClient, err := server.Connect()
 	if err != nil {
-		log.Fatal(err)
+		log.Printf("Mail error: %s", err)
 	}
 
 	// Create email
 	email := mail.NewMSG()
-	email.SetFrom("From Me <me@host.com>")
-	email.AddTo("you@example.com")
-	email.AddCc("another_you@example.com")
+	email.SetFrom("ross@rossmac.co.uk")
+	email.AddTo("ross@rossmac.co.uk")
 	email.SetSubject("New Go Email")
 
 	email.SetBody(mail.TextHTML, htmlBody)
-	email.AddAttachment("super_cool_file.png")
 
 	// Send email
 	err = email.Send(smtpClient)
 	if err != nil {
 		log.Fatal(err)
+		return err
 	}
+	return nil
 }
