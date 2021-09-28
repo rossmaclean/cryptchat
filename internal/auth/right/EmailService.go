@@ -63,7 +63,8 @@ func SendMail() error {
 
 	// Create email
 	email := mail.NewMSG()
-	email.SetFrom("ross@rossmac.co.uk")
+	//email.SetFrom("ross@rossmac.co.uk")
+	email.SetFrom(fromAddr)
 	email.AddTo("ross@rossmac.co.uk")
 	email.SetSubject("New Go Email")
 
