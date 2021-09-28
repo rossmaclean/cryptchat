@@ -1,0 +1,47 @@
+GET localhost:8000/api/v1/health
+
+###
+POST localhost:8000/api/v1/login
+Content-Type: application/json
+
+{
+  "email": "johnsmith222@email.com",
+  "password": "password"
+}
+
+###
+POST localhost:8000/api/v1/signup
+Content-Type: application/json
+
+{
+  "username": "johnsmith222",
+  "email": "johnsmith222@email.com",
+  "password": "password"
+}
+
+###
+POST localhost:8000/api/v1/chats
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjcnlwdGNoYXR1c2VycyIsImV4cCI6MTYzMjMwOTc5NywiaXNzIjoiY3J5cHRjaGF0LnJvc3NtYWMuY28udWsiLCJ1c2VySWQiOiJ1c2VyMSJ9.m7m4Kgfiwj-aAGazuaoHdG4lp1EaQnHQIsU0sjv-JBc
+
+{
+  "userId": "4dafdaea-0186-473f-b196-c0028824ec76"
+}
+
+###
+POST localhost:8000/api/v1/chat_messages
+Content-Type: application/json
+
+{
+  "chatId": "chat123"
+}
+
+###
+POST localhost:8000/api/v1/new_message
+Content-Type: application/json
+
+{
+  "userId": "Joe",
+  "chatId": "chat123",
+  "message": "Good thanks, how are you?"
+}
