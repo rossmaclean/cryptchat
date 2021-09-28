@@ -2,8 +2,8 @@ package authright
 
 import (
 	"cryptchat/internal"
+	mail "github.com/xhit/go-simple-mail/v2"
 	"log"
-	"net/smtp"
 	"os"
 )
 
@@ -30,16 +30,45 @@ func init() {
 	}
 }
 
+var htmlBody = `
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <title>Hello, World</title>
+</head>
+<body>
+   <p>This is an email using Go</p>
+</body>
+`
+
 func SendMail() error {
-	to := []string{"ross@rossmac.co.uk"}
-	message := []byte("My super secret message.")
+	log.Printf("Server: %s", smtpServer)
+	log.Printf("Domain: %s", domain)
+	server := mail.NewSMTPClient()
+	server.Host = "smtp.host.com"
+	server.Port = 587
+	server.Username = "username@host.com"
+	server.Password = "supersecretpassword"
+	server.Encryption = mail.EncryptionTLS
 
-	auth := smtp.PlainAuth("", fromAddr, smtpPassword, smtpServer)
-
-	err := smtp.SendMail(smtpServer+":"+smtpPort, auth, fromAddr, to, message)
+	smtpClient, err := server.Connect()
 	if err != nil {
-		log.Println(err)
-		return err
+		log.Fatal(err)
 	}
-	return nil
+
+	// Create email
+	email := mail.NewMSG()
+	email.SetFrom("From Me <me@host.com>")
+	email.AddTo("you@example.com")
+	email.AddCc("another_you@example.com")
+	email.SetSubject("New Go Email")
+
+	email.SetBody(mail.TextHTML, htmlBody)
+	email.AddAttachment("super_cool_file.png")
+
+	// Send email
+	err = email.Send(smtpClient)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
