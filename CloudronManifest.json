@@ -5,7 +5,7 @@
   "description": "Encrypted Chat",
   "tagline": "Chat!",
   "version": "0.0.1",
-  "healthCheckPath": "/",
+  "healthCheckPath": "/api/v1/health",
   "httpPort": 8000,
   "addons": {
     "localstorage": {}

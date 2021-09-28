@@ -8,7 +8,7 @@ import (
 
 func GetHealth() (healthcoremodel.HealthResponse, error) {
 	healthStatuses := []healthcoremodel.HealthStatus{}
-	healthStatuses = append(healthStatuses, GetDatabaseHealth())
+	healthStatuses = append(healthStatuses, getDatabaseHealth())
 
 	isErr := false
 	for _, status := range healthStatuses {
@@ -23,7 +23,7 @@ func GetHealth() (healthcoremodel.HealthResponse, error) {
 	return healthcoremodel.HealthResponse{HealthStatuses: healthStatuses}, nil
 }
 
-func GetDatabaseHealth() healthcoremodel.HealthStatus {
+func getDatabaseHealth() healthcoremodel.HealthStatus {
 	status := healthcoremodel.HealthStatus{
 		System: "database",
 		Status: "up",
